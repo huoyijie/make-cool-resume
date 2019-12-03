@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>简历</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+            background: #CCCCCC;
+        }
+
+        .page-inner{
+            height: 100%;
+            width: 100%;
+        }
+
+        .page-wrapper {
+            overflow-x: hidden;
+            background: #CCCCCC;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            box-sizing: border-box;
+        }
+
+        .resume {
+            height: 100%;
+            width: 100%;
+        }
+
+        .page {
+            background: white;
+            position: relative;
+            width: 21cm;
+            height: 29.68cm;
+            display: block;
+            page-break-after: auto;
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            cursor: pointer;
+            text-decoration-line: none;
+        }
+
+        a:visited {
+            color: inherit;
+        }
+
+        .resume {
+            position: relative;
+            font-family:'Roboto' !important;
+            font-size: 0.9em;
+        }
+
+        .picture {
+            position: absolute;
+            top: 85px;
+            left: 200px;
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            border: 2px solid lightskyblue;
+            z-index: 2;
+        }
+
+        .banner {
+            width: calc(100% - 60px);
+            height: 120px;
+            padding: 30px;
+            background-color: lightseagreen;/*orchid;*/
+            /*
+                background-image: url('../../resume/banner.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+            */
+            color: white;
+        }
+
+        .banner__fullname {
+            font-size: 32px;
+        }
+
+        .banner__position {
+            font-size: 16px;
+        }
+
+        .banner__location {
+            font-size: 12px;
+        }
+
+        .content {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .content .content__left, .content__right {
+            height: 100%;
+            padding: 30px;
+        }
+
+        .content .content__left {
+            width: 200px;
+            color: rgba(255, 255, 255, 1);
+            background-color: lightskyblue;
+        }
+
+        .content .content__left .section-headline {
+            color: white;
+        }
+
+        .content .content__right {
+            flex: 1;
+        }
+
+        .section {
+            margin: 20px 0;
+        }
+
+        .section-link,
+        .section-headline {
+            display: flex !important;
+            align-items: center;
+            color: #34495E;
+            display: inline-block;
+            font-size: 1.2em;
+            margin: 8px 0;
+        }
+
+        .section-link__icon,
+        .section-headline__icon {
+            margin-right: 8px;
+            font-size: 1.4em;
+        }
+
+        .section-link {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.59) !important;
+        }
+
+        .section-link__icon {
+            color: white;
+        }
+
+        .section-content {
+            margin-top: 5px;
+            padding-left: 32px;
+            font-size: 14px;
+        }
+
+        .section-content__item {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-content__header {
+            display: block;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .section-content__subheader {
+            display: block;
+            font-size: 0.9em;
+            font-weight: 400;
+        }
+
+        .section-content__plain,
+        .section-content__text {
+            display: block;
+            font-size: 12px;
+        }
+
+        .section-content__plain--light, .section-content__text--light {
+            font-size: 12px;
+        }
+
+        .section-content__plain {
+            display: inline;
+            font-weight: 300;
+        }
+
+        .section-content__item-grid {
+            flex: 1 1 0;
+            margin-bottom: 5px;
+            padding-right: 5px;
+        }
+
+        .section-content--plain {
+            padding: 0;
+        }
+
+        .section-content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .grid-item {
+            padding-right: 5px;
+        }
+
+        .squarred-grid-item {
+            display: block;
+            border: 1px solid white;
+            color: white;
+            margin-top: 5px;
+            padding: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="fontawesome/css/all.css"/>
+  </head>
+  <body>
+    <div id="app" @dragenter.stop.prevent
+    @dragover.stop.prevent="dragOver"
+    @drop.stop.prevent="doDrop">
+        <template>
+            <div class="page-wrapper">
+                <div class="page" id="cool">
+                <div class="page-inner">
+                <template>
+                    <div class="resume">
+                        <div class="banner">
+                        <div class="banner__fullname">{{ person.name.first }} {{ person.name.middle }} {{ person.name.last }}</div>
+                        <div class="banner__position">{{ person.position }}</div>
+                        <div v-if="person.birth" class="banner__location">{{ lang.bornIn }} {{person.birth.year}} {{ lang.liveIn }} {{person.birth.location}}</div>
+                        </div>
+                    
+                        <div class="content">
+                        <div class="content__left">
+                            <div class="section">
+                            <div class="section-headline">
+                                {{ lang.about }}
+                            </div>
+                    
+                            <div class="section-content section-content--plain">
+                                <span class="section-content__text">
+                                {{ person.about }}
+                                <br/>
+                                <br/>
+                                {{ person.knowledge }}
+                                </span>
+                            </div>
+                            </div>
+
+                            <div class="section">
+                            <div class="section-headline">
+                                <i class="fas fa-school section-headline__icon"></i>{{ lang.education }}
+                            </div>
+                    
+                            <div class="section-content section-content--plain">
+                                <a
+                                v-for="(education, index) in person.education"
+                                class="section-content__item"
+                                :key="index"
+                                :href="education.website">
+                    
+                                <span class="section-content__header"> {{ education.school }} </span>
+                                <span class="section-content__subheader">{{ education.degree }}</span>
+                                <span class="section-content__text"> {{ education.timeperiod }} </span>
+                                <span class="section-content__text--light"> {{ education.description }} </span>
+                                </a>
+                            </div>
+                            </div>
+                    
+                            <div
+                            v-if="person.skills"
+                            class="section">
+                            <div class="section-headline">
+                                {{ lang.skills }}
+                            </div>
+                    
+                            <div class="section-content-grid">
+                                <a
+                                v-for="(skill, index) in person.skills"
+                                class="grid-item"
+                                :key="index"
+                                :href="skill.url">
+                                <span class="squarred-grid-item">
+                                    {{ skill.name }}
+                                </span>
+                                </a>
+                            </div>
+                            </div>
+                    
+                            <div class="section">
+                            <div class="section-headline">
+                                {{ lang.contact }}
+                            </div>
+                    
+                            <div class="section-content section-content--plain">
+                                <div class="section-link">
+                                    <i class="fas fa-home section-link__icon"></i>{{ person.contact.street }}
+                                </div>
+                    
+                                <a
+                                class="section-link"
+                                :href="contactLinks.email">
+                                <i class="fas fa-mail-bulk section-link__icon"></i>{{ person.contact.email }}
+                                </a>
+                    
+                                <div class="section-link">
+                                    <i class="fas fa-phone section-link__icon"></i>{{ person.contact.phone }}
+                                </div>
+                    
+                                <a
+                                v-if="person.contact.website"
+                                class="section-link"
+                                :href="person.contact.website">
+                                <i class="fas fa-blog section-link__icon"></i>{{ person.contact.website }}
+                                </a>
+                    
+                                <a
+                                v-if="person.contact.linkedin"
+                                class="section-link"
+                                :href="contactLinks.linkedin">
+                                <i class="fab fa-linkedin section-link__icon"></i>{{ person.contact.linkedin }}
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+                    
+                        <div class="content__right">
+                            <div class="section">
+                            <div class="section-headline">
+                                <i class="fas fa-desktop section-headline__icon"></i>{{ lang.experience }}
+                            </div>
+                    
+                            <div class="section-content">
+                                <a
+                                v-for="(experience, index) in person.experience"
+                                :key="index"
+                                class="section-content__item"
+                                :href="experience.website">
+                    
+                                <span class="section-content__header">{{ experience.position }}</span>
+                                <span class="section-content__subheader">
+                                    {{ experience.company }}
+                                    <span class="section-content__plain">{{ experience.location }}</span>
+                                </span>
+                    
+                                <div class="section-content__text">{{ experience.timeperiod }}</div>
+                                <span class="section-content__text--light">{{ experience.description }}</span>
+                                </a>
+                            </div>
+                            </div>
+                    
+                            <div
+                            v-if="person.projects"
+                            class="section">
+                            <div class="section-headline">
+                                <i class="fas fa-tasks section-headline__icon"></i>{{ lang.projects }}
+                            </div>
+                    
+                            <div class="section-content-grid">
+                                <a v-for="(project, index) in person.projects" :key="index"
+                                class="section-content__item-grid"
+                                :href="project.url">
+                                <span class="section-content__header"> {{ project.name }} </span>
+                                <span class="section-content__subheader">{{ project.role }}</span>
+                                <span class="section-content__text"> {{ project.timeperiod }} </span>
+                                <span class="section-content__text--light"> {{ project.description }} </span>
+                                </a>
+                            </div>
+                            </div>
+                    
+                            <div
+                            v-if="person.contributions"
+                            class="section">
+                            <div class="section-headline">
+                                <i class="fas fa-award section-headline__icon"></i>{{lang.contributions}}
+                            </div>
+                    
+                            <div class="section-content-grid">
+                                <a
+                                v-for="(contribution, index) in person.contributions"
+                                class="section-content__item-grid"
+                                :key="index"
+                                :href="contribution.url">
+                                <span class="section-content__header"> {{ contribution.name }} </span>
+                                <span class="section-content__text"> {{ contribution.description }} </span>
+                                <span class="section-content__text--light" style="word-break: break-all;">
+                                    {{ contribution.url }}
+                                </span>
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    
+                        <img class="picture" src="id.jpg"/>
+                    </div>
+                </template>
+                </div>
+                </div>
+            </div>
+        </template>
+    </div>
+    <script src="fontawesome/js/all.js"></script>
+    <script src="vue/dist/vue.js"></script>
+    <script src="js-yaml/dist/js-yaml.js"></script>
+    <script>
+        'use strict';
+
+        function $(selector) {
+            return document.querySelector(selector);
+        }
+
+        var $vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    lang: {
+                        contact: '联系方式',
+                        experience: '工作经历',
+                        education: '教育经历',
+                        skills: '技能专长',
+                        projects: '项目',
+                        contributions: '获奖',
+                        about: '自我介绍',
+                        bornIn: '出生于',
+                        liveIn: '居住于'
+                    },
+                    person: {
+                        name: {
+                            first: '王明',
+                            middle: '',
+                            last: ''
+                        },
+                        about: `这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来
+                                              并做出自己的一份贡献，请克隆 https://github.com/mdn/interactive-examples并发送给我们一个拉取请求
+                                              上面的例子展示了 <video> 元素的用法。和元素的使用类似，在 src 属性里加入一个我们需要展示的视频地址，同时也可以用其他属性来定义视频的宽度高度、是否自动或者循环播放、是否展示浏览器默认的视频控件等信息。`,
+                        position: '高级工程师',
+                        birth: {
+                            year: '1990年',
+                            location: '上海'
+                        },
+                        experience: [
+                            {
+                                company: '公司A',
+                                position: '工程师',
+                                timeperiod: '2016年2月至今',
+                                description: '这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来'
+                            },
+                            {
+                                company: '公司B',
+                                position: '工程师',
+                                timeperiod: '2015年2月 - 2016年2月',
+                                description: '这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来'
+                            },
+                            {
+                                company: '公司C',
+                                position: '工程师',
+                                timeperiod: '2010年3月 - 2015年1月',
+                                description: '这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来'
+                            }
+                        ],
+                        education: [
+                            {
+                                degree: '硕士',
+                                timeperiod: '2008年9月 - 2010年7月',
+                                description: '就读于清华大学信息学院，主修计算机科学与技术专业'
+                            },
+                            {
+                                degree: '学士',
+                                timeperiod: '2004年9月 - 2008年7月',
+                                description: '就读于清华大学信息学院，主修计算机科学与技术专业'
+                            }
+                        ],
+                        skills: [
+                            {
+                                name: 'Word',
+                                level: '熟练'
+                            },
+                            {
+                                name: 'Word',
+                                level: '熟练'
+                            },
+                            {
+                                name: 'Word',
+                                level: '熟练'
+                            }
+                        ],
+                        knowledge: `Also proficient in Adobe Photoshop and Illustrator, grew up bilingual
+                                    (English and Klingon).`,
+                        projects: [
+                            {
+                                name: '项目A',
+                                role: '项目经理',
+                                timeperiod: '2004年9月 - 2008年7月',
+                                description: `这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来
+                                              并做出自己的一份贡献，请克隆 https://github.com/mdn/interactive-examples并发送给我们一个拉取请求
+                                              上面的例子展示了 <video> 元素的用法。和元素的使用类似，在 src 属性里加入一个我们需要展示的视频地址，同时也可以用其他属性来定义视频的宽度高度、是否自动或者循环播放、是否展示浏览器默认的视频控件等信息。`
+                            },
+                            {
+                                name: '项目B',
+                                role: '项目经理',
+                                timeperiod: '2004年9月 - 2008年7月',
+                                description: `这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来
+                                              并做出自己的一份贡献，请克隆 https://github.com/mdn/interactive-examples并发送给我们一个拉取请求
+                                              上面的例子展示了 <video> 元素的用法。和元素的使用类似，在 src 属性里加入一个我们需要展示的视频地址，同时也可以用其他属性来定义视频的宽度高度、是否自动或者循环播放、是否展示浏览器默认的视频控件等信息。`
+                            }
+                        ],
+                        hobbies: [
+                            {
+                                name: '电影配音'
+                            },
+                            {
+                                name: '画画'
+                            }
+                        ],
+                        contributions: [
+                            {
+                                name: '2019年度最佳员工',
+                                description: '这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来'
+                            },
+                            {
+                                name: '2018年度最佳员工',
+                                description: '这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来'
+                            }
+                        ],
+                        contact: {
+                            email: 'john.doe@email.com',
+                            phone: '0123 456789',
+                            street: '1234 Broadway',
+                            city: '上海'
+                        }
+                    }
+                };
+            },
+            computed: {
+                contactLinks() {
+                    const links = {};
+
+                    if(this.person.contact.github) {
+                        links.github = `https://github.com/${this.person.contact.github}`;
+                    }
+
+                    if(this.person.contact.codefights) {
+                        links.codefights = `https://codefights.com/profile/${this.person.contact.codefights}`;
+                    }
+
+                    if(this.person.contact.medium) {
+                        links.medium = `https://medium.com/@${this.person.contact.medium}`;
+                    }
+
+                    if(this.person.contact.email) {
+                        links.email = `mailto:${this.person.contact.email}`;
+                    }
+
+                    if(this.person.contact.linkedin) {
+                        links.linkedin = `https://linkedin.com/in/${this.person.contact.linkedin}`;
+                    }
+
+                    if(this.person.contact.phone) {
+                        links.phone = `tel:${this.person.contact.phone}`;
+                    }
+
+                    return links;
+                }
+            },
+            methods: {
+                dragOver(e) {
+                    document.body.style.opacity = 0.3;
+                },
+                doDrop(e) {
+                    document.body.style.opacity = 1;
+                    var files = e.dataTransfer.files;
+                    for (let i = 0; i < files.length; i++) {
+                        const file = files[i];
+                        console.log(file);
+                        if(file.name === 'id.jpg') {
+                            const fileUrl = URL.createObjectURL(file);
+                            $('img.picture').src = fileUrl;
+                        } else if(file.name === 'data.yml') {
+                            var fileReader = new FileReader();
+                            fileReader.onloadend = e => {
+                                console.log(e.target.result);
+                                this.person = jsyaml.safeLoad(e.target.result);
+                            };
+                            fileReader.readAsText(file);
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+  </body>
+</html>
