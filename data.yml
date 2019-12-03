@@ -1,46 +1,57 @@
+# 准备好id.jpg头像图片，要求正装白底，图片长宽1:1
+# 准备好data.yml，格式如下(注意:不要破坏格式，否则无法读取数据):
+
+# 姓名
 name:
-  first: John
+  first: 王丹丹
   middle:
-  last: Doe
-about: Hi, my name is John Doe. I"m just about the most boring type of person you could
-       possibly imagine. I like collecting leaves from the tree in my back yard and documenting
-       each time I eat a peanut that is non-uniform. I am not a robot. Please hire me.
-position: Software Developer
+  last:
+# 个人简介(200字内)
+about: 这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来 并做出自己的一份贡献，请克隆 https://github.com/mdn/interactive-examples并发送给我们一个拉取请求 上面的例子展示了 <video> 元素的用法。和元素的使用类似，在 src 属性里加入一个我们需要展示的视频地址，同时也可以用其他属性来定义视频的宽度高度、是否自动或者循环播放、是否展示浏览器默认的视频控件等信息。
+
+# 期望职位
+position: 高级工程师
 
 birth:
+  # 出生日期
   year: 1990年
-  location: New York
+  # 居住地
+  location: 上海
 
+# 工作经历(最近的3家公司，太多会影响排版)
 experience:
-- company: Company A
-  position: Developer
-  timeperiod: since January 2016
-  description: Programming and watching cute cat videos.
-  website: https://example.com
+- company: 公司A
+  position: 初级工程师
+  timeperiod: 2016年2月至今
+  # 工作描述(80字内)
+  description: 这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来
 
-- company: Company B
-  position: Frontend Developer
-  timeperiod: January 2015 - December 2015
-  description: Fulfillment of extremely important tasks.
+- company: 公司B
+  position: 高级工程师
+  timeperiod: 2015年2月 - 2016年2月
+  description: 这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来
 
-- company: Company C
-  position: Trainee
-  timeperiod: March 2014 - December 2014
-  description: Making coffee and baking cookies.
+- company: 公司C
+  position: 项目经理
+  timeperiod: 2010年3月 - 2015年1月
+  description: 这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来
 
+# 教育背景(最近就读的2所学校，最多不超过3个，太多影响排版)
 education:
-- degree: Master of Arts
-  timeperiod: March 2012 - December 2013
-  description: Major in Hacking and Computer Penetration, University A, New York, USA.
-  website: https://example.com
+- degree: 硕士
+  timeperiod: 2008年9月 - 2010年7月
+  # 主修专业院校信息(30字内)
+  description: 就读于清华大学信息学院，主修计算机科学与技术专业
 
-- degree: Bachelor of Science
-  timeperiod: March 2009 - December 2011
-  description: Major in Engineering, University B, Los Angeles, USA.
+- degree: 学士
+  timeperiod: 2004年9月 - 2008年7月
+  description: 就读于清华大学信息学院，主修计算机科学与技术专业
 
-# skill level goes 0 to 100
+# 工作技能(数量不要太多，可以看看效果是否好。可以复制现有结构增加任意数量，也可以删除)
 skills:
+  # 技能名称
 - name: HTML5
+  # 技能熟练程度
   level: 99
 - name: CSS3
   level: 95
@@ -56,35 +67,45 @@ skills:
   level: 70
 - name: Docker
   level: 99
+
+# 个人介绍后面的补充说明，可选(30字内)
 knowledge: Also proficient in Adobe Photoshop and Illustrator, grew up bilingual
   (English and Klingon).
 
+# 项目经历(最重要的2个项目)
 projects:
-- name: best-resume-ever
-  platform: Vue
-  description: 👔 💼 Build fast 🚀 and easy multiple beautiful resumes and create your best CV ever! Made with Vue and LESS.
-  url: https://github.com/salomonelli/best-resume-ever
+- name: 项目A
+  role: 项目经理
+  timeperiod: 2008年9月 - 2010年7月
+  # 项目描述(150字内)
+  description: 这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来 并做出自己的一份贡献，请克隆 https://github.com/mdn/interactive-examples并发送给我们一个拉取请求 上面的例子展示了 <video> 元素的用法。和元素的使用类似，在 src 属性里加入一个我们需要展示的视频地址，同时也可以用其他属性来定义视频的宽度高度、是否自动或者循环播放、是否展示浏览器默认的视频控件等信息。
+- name: 项目B
+  role: 项目经理
+  timeperiod: 2008年9月 - 2010年7月
+  # 项目描述(150字内)
+  description: 这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来 并做出自己的一份贡献，请克隆 https://github.com/mdn/interactive-examples并发送给我们一个拉取请求 上面的例子展示了 <video> 元素的用法。和元素的使用类似，在 src 属性里加入一个我们需要展示的视频地址，同时也可以用其他属性来定义视频的宽度高度、是否自动或者循环播放、是否展示浏览器默认的视频控件等信息。
 
+# 爱好
 hobbies:
-- name: Video Games
-  iconClass: fa fa-gamepad
-  url: https://example.com
+- name: 跳舞
+- name: 画画
 
-- name: Drawing
-  iconClass: fa fa-pencil
-  url: https://example.com
-
+# 获奖经历(最重要的2个项目)
 contributions:
-- name: best-resume-ever
-  description: 👔 💼 Build fast 🚀 and easy multiple beautiful resumes.
-  url: https://github.com/salomonelli/best-resume-ever
+- name: 2019年度最佳员工
+  # 获奖描述(50字内)
+  description: 这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来
+- name: 2019年度最佳员工
+  # 获奖描述(50字内)
+  description: 这个交互式例子的源码储存在GitHub仓库上，如果你想要参与到这个交互式例子的项目中来
 
+# 联系方式
 contact:
   email: john.doe@email.com
   phone: 0123 456789
-  street: 1234 Broadway
-  city: New York
-  website: johndoe.com
-  github: johnyD
+  street: XX区XX路XX弄XX号XX室
+  city: XX市
+
 # en, de, fr, pt, ca, cn, it, es, th, pt-br, ru, sv, id, hu, pl, ja, ka, nl, he, zh-tw, lt, ko, el, nb-no
+# 不需调整
 lang: cn
