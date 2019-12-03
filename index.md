@@ -7,7 +7,7 @@
 
 ## 3.按照data.yml中提示准备好简历头像，并命名为id.jpg
 
-## 4.调整至简历页面[resume](resume.html)
+## 4.跳转至简历页面，点击[resume](resume.html)
 
 ## 5.把编辑好的data.yml和id.jpg拖拽进入浏览器，会自动刷新简历信息
 
