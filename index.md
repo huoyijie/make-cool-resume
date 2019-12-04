@@ -1,7 +1,7 @@
 # make-cool-resume
 
 ## 1.先下载data.yml
-点击下载<a href="data.yml" download="data.yml">data.yml</a>
+点击下载<a href="data.yml.txt" download="data.yml">data.yml</a>
 
 ## 2.按照data.yml中格式进行编辑简历信息，文件命名为data.yml
 
